@@ -1,7 +1,7 @@
 #! /usr/bin/perl
 use Devel::NYTProf;
 use Benchmark;
-use File::Copy::Recursive qw(dircopy);
+use File::Copy::Recursive qw(dircopy fcopy);
 my $adir="D:\\perltest\\get\\filea";
 my $bdir="D:\\perltest\\get\\fileb";
 my @D_adir;
@@ -47,16 +47,27 @@ if (($#D_adir<=>$#D_bdir)!=1){
 #$a_with_b="$adir $bdir /e";
 #print "$a_with_b\n";
 #system "xcopy","$adir","$bdir","/e","/y";
-dircopy($adir,$bdir);
 
-=pop
+
 foreach(@difference){
+    print "$_\n";
+    if (-d){
+        $a_with=$adir.$add.$_;
+        $b_with=$bdir.$add.$_;
+        print "$a_with $b_with\n";
+         dircopy($a_with,$b_with);
+    }
+    
+    dircopy($a_with,$b_with);
+    
     $a_with=$adir.$add.$_;
-    $b_with=$bdir.$add.$_.$add
-    if -d $a_with;
-    $b_with=$bdir.$add;
+    fcopy($a_with,$bdir);
+    
+   
 }
 
+
+=pop
 my $with;
 my $add="\\";
 foreach(@difference){
